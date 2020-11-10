@@ -10,22 +10,22 @@ const nextBtn = document.getElementById('next');
 const songs = [
   {
     name: 'song1',
-    display: 'Electric Chill Machine',
+    displayName: 'Electric Chill Machine',
     artist: 'Jacinto' 
   },
   {
     name: 'song2',
-    display: 'Seven Nation Army(Remix)',
+    displayName: 'Seven Nation Army(Remix)',
     artist: 'White Stripes'
   },
   {
     name: 'song3',
-    display: 'Goodnight Disco Queen',
+    displayName: 'Goodnight Disco Queen',
     artist: 'Donna Summer'
   },
   {
     name: 'metric-1',
-    display: 'Front Row(Remix)',
+    displayName: 'Front Row(Remix)',
     artist: 'Metric'
   }
 ];
@@ -60,5 +60,32 @@ function loadSong(song) {
   image.src = `img/${song.name}.jpg`;
 }
 
+// Current Song
+let songIndex = 1;
+
+// Previous Song
+function prevSong() {
+  songIndex--;
+  if(songIndex < 0) {
+    songIndex = songs.length -1;
+  }
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
+// Next Song
+function nextSong() {
+  songIndex++;
+  if(songIndex > songs.length -1) {
+    songIndex = 0;
+  }
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
 // On Load - select first song
-loadSong(songs[1]);
+loadSong(songs[songIndex]);
+
+// Event listeners
+prevBtn.addEventListener('click', prevSong);
+nextBtn.addEventListener('click', nextSong);
